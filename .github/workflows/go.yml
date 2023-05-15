@@ -13,6 +13,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      MYSQL_HOST: 'db'
     steps:
     - uses: actions/checkout@v3
 
@@ -23,3 +25,11 @@ jobs:
 
     - name: test
       run: make test
+    services:
+      db:
+        image: mysql:${{ matrix.version}}
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10

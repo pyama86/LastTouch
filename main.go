@@ -10,9 +10,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// Replace with your JWT secret
-var jwtSecret = []byte("your_jwt_secret")
-
 type Response struct {
 	UpdateTime string `json:"update_time"`
 }

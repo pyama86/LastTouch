@@ -35,7 +35,7 @@ func TestGetUpdateTimeHandlerSuccess(t *testing.T) {
 
 	handler.ServeHTTP(rr, req)
 
-	assert.Equal(t, http.StatusOK, rr.Code)
+	assert.Equal(t, http.StatusOK, rr.Code, rr.Body.String())
 
 	var resp Response
 	err = json.Unmarshal(rr.Body.Bytes(), &resp)

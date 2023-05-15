@@ -28,7 +28,7 @@ jobs:
       run: make test
     services:
       db:
-        image: mysql:8
+        image: mysql:${{ matrix.version}}
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         ports:

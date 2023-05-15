@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-host=db
+host=${MYSQL_HOST:-localhost}
 mysql -uroot -h $host -e "CREATE DATABASE IF NOT EXISTS  lasttouch"
 mysql -uroot -h $host -e "CREATE TABLE IF NOT EXISTS lasttouch.example (
     id INT(11) NOT NULL auto_increment PRIMARY KEY,

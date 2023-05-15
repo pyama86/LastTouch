@@ -8,6 +8,7 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/sirupsen/logrus"
 )
 
 type Response struct {
@@ -43,6 +44,7 @@ func getUpdateTimeHandler(w http.ResponseWriter, r *http.Request) {
 
 	updateTime, err := getUpdateTime(db, table)
 	if err != nil {
+		logrus.WithError(err).Error("Failed to get update time")
 		http.Error(w, "Failed to get update time", http.StatusInternalServerError)
 		return
 	}
@@ -50,6 +52,7 @@ func getUpdateTimeHandler(w http.ResponseWriter, r *http.Request) {
 	resp := Response{UpdateTime: updateTime}
 	jsonBytes, err := json.Marshal(resp)
 	if err != nil {
+		logrus.WithError(err).Error("Failed to marshal response")
 		http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
 		return
 	}
